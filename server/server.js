@@ -16,11 +16,8 @@ app.post('/todos', (req, res) => { //Resource creatio endpoint
     
     todo.save().then((doc) => {
         res.send(doc);
-        console.log(`New todo ${req.body.text}`);
     }, (err) => {
-        if(err){
-            console.log(err);
-        }
+        res.status(400).send(err);
     })
 });
 
@@ -28,3 +25,6 @@ app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Todo app started");
 });
 
+module.exports = {
+    app
+};
