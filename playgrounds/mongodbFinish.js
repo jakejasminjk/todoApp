@@ -47,13 +47,14 @@ MongoClient.connect('mongodb://localhost/TodoApp', (err, client) => {
            console.log('We have an error', err);
        }
    })*/
-   db.collection('Task').find().count().then((count) => {
+   /*db.collection('Task').find().count().then((count) => {
        console.log(`Task count: ${count}`);
        
    }, (err) => {
        if(err){
            console.log('We have an error', err);
        }
-   })
+   })*/
+   
     //client.close();
 });
