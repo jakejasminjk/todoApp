@@ -18,7 +18,7 @@ app.post('/todos', (req, res) => { //Resource creation endpoint
         res.send(doc);
     }, (err) => {
         res.status(400).send(err);
-    })
+    });
 });
 
 app.get('/todos', (req,res) => {
@@ -26,7 +26,7 @@ app.get('/todos', (req,res) => {
         res.send({todos}); //setting the todos as an object rather than an array(without the brackets it's an array)
     }, (err) => {
         res.status(400).send(err);
-    })
+    });
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
