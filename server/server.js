@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const {ObjectID} = require('mongodb'); 
 
-let {mongoose} = require('./db/mongoose.js');
-let {Todo} = require('./models/todo.js');
-let {User} = require('./models/user.js');
+const {mongoose} = require('./db/mongoose.js');
+const {Todo} = require('./models/todo.js');
+const {User} = require('./models/user.js');
 
 let app = express();
 
@@ -29,6 +30,21 @@ app.get('/todos', (req,res) => {
     });
 });
 
+app.get('/todos/:id', (req, res) => {
+     if(ObjectID.isValid(req.params.id)){
+         return res.status(400).send('This is not a vail id');
+     }
+         Todo.findById(req.params.id).then((todo) => {
+        if(!req.params.id){
+            res.status(400).send('Id does not match a todo');
+        }else{
+        res.send(todo);
+        }
+    }).catch((e) => {
+        console.log('ERROR WARNING', e);
+    });
+        
+});
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Todo app started");
 });

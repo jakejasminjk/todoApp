@@ -69,15 +69,6 @@ describe('Get /todos', () => {
     .expect((res) => {
       expect(res.body.todos.length).toBe(3);
     })
-    .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-
-        Todo.find({}).then((todos) => {
-          expect(todos.length).toBe(3);
-          done();
-        }).catch((e) => done(e));
-      });
+    .end(done);
   })
 })
