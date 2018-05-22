@@ -31,20 +31,22 @@ app.get('/todos', (req,res) => {
 });
 
 app.get('/todos/:id', (req, res) => {
-     if(ObjectID.isValid(req.params.id)){
-         return res.status(400).send('This is not a vail id');
+    let id = req.params.id;
+     if(!ObjectID.isValid(id)){
+         return res.status(404).send();
      }
-         Todo.findById(req.params.id).then((todo) => {
-        if(!req.params.id){
-            res.status(400).send('Id does not match a todo');
+         Todo.findById(id).then((todo) => {
+        if(!todo){
+         return res.status(404).send();
         }else{
-        res.send(todo);
+        res.send({todo});
         }
     }).catch((e) => {
-        console.log('ERROR WARNING', e);
+        res.status(400).send();
     });
         
 });
+
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Todo app started");
 });
