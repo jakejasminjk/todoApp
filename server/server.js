@@ -7,7 +7,7 @@ const {Todo} = require('./models/todo.js');
 const {User} = require('./models/user.js');
 
 let app = express();
-
+var port = process.env.DATABASEURL || 'mongodb://localhost/TodoApp'
 app.use(bodyParser.json());
 
 app.post('/todos', (req, res) => { //Resource creation endpoint 
@@ -47,7 +47,7 @@ app.get('/todos/:id', (req, res) => {
         
 });
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(port, function(){
    console.log("Todo app started");
 });
 
